@@ -13,15 +13,25 @@ license=('MIT')
 depends=(libxft)
 url=https://st.suckless.org
 source=(https://dl.suckless.org/$pkgname/$pkgname-$pkgver.tar.gz
+        st-alpha-20220206-0.8.5.diff
+        st-scrollback-20210507-4536f46.diff
+        st-changealpha-20230519-b44f2ad.diff
         terminfo.patch
         README.terminfo.rst)
 sha256sums=('f36359799734eae785becb374063f0be833cf22f88b4f169cd251b99324e08e7'
+            '42e4803ce2a67835f7e533a707a8a28e3804a26ced163145108970b9aee5fb81'
+            '19d8f4e7fd0d1933dc6fcf6c7333db08e1b40fc75795464660c4d723eb62511c'
+            'fa74448f664fa9e5e0ac2b70240a4a6ae0ae70a3b2273ad5bc8fa95900362cfc'
             'f9deea445a5c6203a0e8e699f3c3b55e27275f17fb408562c4dd5d649edeea23'
             '95be3197f7de77a0fe2e4f527202e17e910ee24e1ed6bc39beb320a1304bb7e1')
 _sourcedir=$pkgname-$pkgver
 
 prepare() {
   patch -d "$_sourcedir" -p 0 < terminfo.patch
+        
+  patch --strip=1 --directory="$_sourcedir" < "st-alpha-20220206-0.8.5.diff"
+  patch --strip=1 --directory="$_sourcedir" < "st-scrollback-20210507-4536f46.diff"
+  patch --strip=1 --directory="$_sourcedir" < "st-changealpha-20230519-b44f2ad.diff"
 
   # This package provides a mechanism to provide a custom config.h. Multiple
   # configuration states are determined by the presence of two files in
