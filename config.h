@@ -107,7 +107,7 @@ char *termname = "st-256color";
 unsigned int tabspaces = 8;
 
 /* bg opacity */
-float alpha_def;
+float alpha_def; /*variable definition necessary for changealpha patch.*/
 float alpha = 0.8;
 float alphaOffset = 0.0;
 float alphaUnfocus;
@@ -226,11 +226,14 @@ static Shortcut shortcuts[] = {
 	{ TERMMOD,              XK_Num_Lock,    numlock,        {.i =  0} },
   { SPECIALMOD,           XK_K,           kscrollup,      {.i =  2} },
 	{ SPECIALMOD,           XK_J,           kscrolldown,    {.i =  2} },
-	{ TERMMOD,	   					XK_K,						chgalpha,   	  {.f = +0.25} },
-	{ TERMMOD,							XK_J,						chgalpha,	      {.f = -0.25} },
+	{ TERMMOD,	   					XK_K,						chgalpha,   	  {.f = +1} },
+	{ TERMMOD,							XK_J,						chgalpha,	      {.f = -1} },
 };
 
 /*
+kscrollup and kscrolldown functions belong to scrollback patch
+chgalpha function is from changealpha patch
+
  * Special keys (change & recompile st.info accordingly)
  *
  * Mask value:
